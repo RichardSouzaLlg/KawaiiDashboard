@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Financeiro Kawaii 🌸 - Versão Pro</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <header class="kawaii-card header-flex">
+            <div class="profile-info">
+                <div class="avatar-circle"><img id="operatorAvatar" src="/static/jan.jpg"></div>
+                <div><h2 id="currentMonthTitle">Janeiro</h2><span>Status: <strong id="systemStatus">Estável ✨</strong></span></div>
+            </div>
+            <div class="total-balance"><small>SALDO TOTAL</small><h1 id="saldoFinal">R$ 0,00</h1></div>
+        </header>
+
+        <nav id="monthTabs" class="month-tabs"></nav>
+
+        <div class="kawaii-card">
+            <h3>💰 POUPANÇA GERAL</h3>
+            <div class="input-group">
+                <input type="number" id="inputGuardado" placeholder="Quanto poupou este mês?">
+                <button onclick="salvarGuardado()">Salvar Poupança</button>
+            </div>
+        </div>
+
+        <div class="kawaii-card card-boletos">
+            <h3>📝 CONTAS A PAGAR (BOLETOS)</h3>
+            <div class="input-group">
+                <input type="text" id="descBoleto" placeholder="Ex: Luz, Água...">
+                <input type="number" id="valorBoleto" placeholder="R$">
+                <button onclick="adicionar('boletos')" style="background: #ffcfcf;">Adicionar Conta</button>
+            </div>
+            <div id="listaBoletos" class="item-list"></div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="kawaii-card">
+                <h3>🌸 ENTRADAS</h3>
+                <div class="input-group vertical">
+                    <input type="text" id="descEntrada" placeholder="O que recebeu?">
+                    <div class="row">
+                        <input type="number" id="valorEntrada" placeholder="R$">
+                        <select id="contaEntrada">
+                            <option value="Pix">Pix</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Débito">Débito</option>
+                        </select>
+                        <button onclick="adicionar('entradas')">＋</button>
+                    </div>
+                </div>
+                <div id="listaEntradas" class="item-list"></div>
+            </div>
+
+            <div class="kawaii-card">
+                <h3>💧 SAÍDAS</h3>
+                <div class="input-group vertical">
+                    <input type="text" id="descSaida" placeholder="Com o que gastou?">
+                    <div class="row">
+                        <input type="number" id="valorSaida" placeholder="R$">
+                        <select id="contaSaida">
+                            <option value="Crédito">Crédito</option>
+                            <option value="Débito">Débito</option>
+                            <option value="Pix">Pix</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Vale Alimentação">V.A.</option>
+                        </select>
+                        <button onclick="adicionar('saidas')">＋</button>
+                    </div>
+                </div>
+                <div id="listaSaidas" class="item-list"></div>
+            </div>
+        </div>
+
+        <div class="kawaii-card chart-container"><canvas id="meuGrafico"></canvas></div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
