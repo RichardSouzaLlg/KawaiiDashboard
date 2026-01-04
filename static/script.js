@@ -215,3 +215,22 @@ function renderListaBoletos(lista, containerId) {
             </div>`;
     });
 }
+
+function adicionarBotaoLogout() {
+    const header = document.querySelector('.header-flex');
+    if (header && !document.getElementById('logoutBtn')) {
+        const btn = document.createElement('button');
+        btn.id = 'logoutBtn';
+        btn.innerText = 'Sair 🚪';
+        btn.style.background = '#ffcfcf';
+        btn.style.padding = '5px 15px';
+        btn.onclick = () => window.location.href = '/logout';
+        header.appendChild(btn);
+    }
+}
+
+const originalOnload = window.onload;
+window.onload = () => {
+    if (originalOnload) originalOnload();
+    adicionarBotaoLogout();
+};

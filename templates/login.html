@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Financeiro Kawaii 🌸 - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="kawaii-card">
+            <h2 id="authTitle" style="text-align: center; color: var(--pink-dark);">Bem-vinda(o)! 🌸</h2>
+            <p id="authSubtitle" style="text-align: center; margin-bottom: 20px;">Faça login para cuidar das suas economias</p>
+            
+            <div class="input-group vertical">
+                <input type="email" id="email" placeholder="Seu e-mail favorito">
+                <input type="password" id="password" placeholder="Sua senha secreta">
+                <button id="mainBtn" onclick="autenticar()">Entrar no Dashboard ✨</button>
+            </div>
+
+            <p id="toggleText" style="text-align: center; margin-top: 15px; font-size: 0.9em; cursor: pointer;">
+                Ainda não tem conta? <strong style="color: var(--pink-dark);">Crie uma aqui!</strong>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let isLogin = true;
+
+        document.getElementById('toggleText').onclick = function() {
+            isLogin = !isLogin;
+            document.getElementById('authTitle').innerText = isLogin ? "Bem-vinda(o)! 🌸" : "Criar Conta 🦄";
+            document.getElementById('authSubtitle').innerText = isLogin ? "Faça login para cuidar das suas economias" : "Junte-se a nós e organize sua vida financeira";
+            document.getElementById('mainBtn').innerText = isLogin ? "Entrar no Dashboard ✨" : "Cadastrar e Entrar ✨";
+            document.getElementById('toggleText').innerHTML = isLogin ? 
+                'Ainda não tem conta? <strong style="color: var(--pink-dark);">Crie uma aqui!</strong>' : 
+                'Já tem uma conta? <strong style="color: var(--pink-dark);">Faça login!</strong>';
+        };
+
+        async function autenticar() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const endpoint = isLogin ? '/api/login' : '/api/signup';
+
+            if (!email || !password) return alert("Preencha todos os campos! ✨");
+
+            const res = await fetch(endpoint, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                window.location.reload(); 
+            } else {
+                alert(data.message || "Ocorreu um erro 🌸");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -267,3 +267,29 @@ input[type="checkbox"] {
     cursor: pointer;
     accent-color: #ffafbd; 
 }
+
+.login-container {
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.input-group input:invalid {
+    border-color: #ffb7b7;
+}
+
+.btn-del:hover {
+    color: #ff4d4d;
+    background: #fff0f0;
+    border-radius: 50%;
+}
+
+@media (max-width: 480px) {
+    .kawaii-card {
+        padding: 15px;
+        border-width: 3px;
+    }
+}
