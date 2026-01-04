@@ -1,0 +1,15 @@
+
+users.json
+data_*.json
+finance_data.json
+
+
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# --- Sistema Operativo ---
+.DS_Store
+Thumbs.db
